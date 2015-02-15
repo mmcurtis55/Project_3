@@ -4,6 +4,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +18,25 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String[] favoriteTVShows = {"Game of Thrones", "Always sunny",
+                "Lucas Bros Moving", "Alphas", "Breaking bad",
+                "LOmasdf", "Lomas", "Far Cry 4", "asdfd", "thie aios iobas", "one ring to rule them all", "long chang"};
+
+        ListAdapter theAddapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                favoriteTVShows);
+
+        ListView theListView = (ListView) findViewById(R.id.theListView);
+        theListView.setAdapter(theAddapter);
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                String tvShowPicked = "Selected " + String.valueOf(adapterView.getItemAtPosition(position));
+
+                Toast.makeText(MainActivity.this, tvShowPicked, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
